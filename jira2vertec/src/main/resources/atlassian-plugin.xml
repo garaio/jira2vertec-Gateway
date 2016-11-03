@@ -1,0 +1,65 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+        <application-version min="4.0"/>
+    </plugin-info>
+
+    <rest key="vertecResource" path="/vertec" version="1.0">
+        <description>Vertec Rest Plugin.</description>
+    </rest>
+
+    <customfield-type key="vertecphasefield" name="Auswahlfeld für Vertec Phasen."
+                      class="com.jira.plugins.VertecPhaseField">
+        <description>Dropdown Listen um eine Vertec-Projekt und eine Phase auszuwählen.</description>
+
+        <resource type="velocity" name="edit" location="templates/edit-vertecphasefield.vm"/>
+        <resource type="velocity" name="view" location="templates/view-vertecphasefield.vm"/>
+        <resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>
+    </customfield-type>
+
+    <customfield-searcher key="vertecphasesearcher" name="Vertec Phase Searcher"
+        i18n-name-key="admin.customfield.searcher.exacttextsearcher.name"
+        class="com.atlassian.jira.issue.customfields.searchers.ExactTextSearcher">
+        <description key="admin.customfield.searcher.exacttextsearcher.desc">Search for an exactly matching VertecPhaseId.</description>
+        <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-basictext.vm"/>
+        <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm"/>
+
+        <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="vertecphasefield"/>
+    </customfield-searcher>
+
+    <web-resource key="clientscript" name="clientscript">
+        <context>atl.general</context>
+        <resource type="download" name="vertecfield.js" location="scripts/vertecfield.js"/>
+    </web-resource>
+
+    <component-import key="eventPublisher" interface="com.atlassian.event.api.EventPublisher"/>
+    <component key="eventListener" class="com.jira.plugins.VertecEventListener">
+        <description>Class that processes the incoming JIRA issue events.</description>
+    </component>
+
+    <component key="VertecRepository" class="com.jira.plugins.vertec.VertecRepositoryImpl">
+        <description>Repository für den Zugriff auf Vertec.</description>
+        <interface>com.jira.plugins.vertec.VertecRepository</interface>
+    </component>
+
+    <component key="VertecConnector" class="com.jira.plugins.vertec.service.VertecConnectorImpl">
+        <description>HTTP Schnittstelle zum Vertec Xml Service.</description>
+        <interface>com.jira.plugins.vertec.service.VertecConnector</interface>
+    </component>
+
+    <component key="VertecSerializer" class="com.jira.plugins.vertec.service.VertecSerializerImpl">
+        <description>Serializer für Vertec XML Objekte.</description>
+        <interface>com.jira.plugins.vertec.service.VertecSerializer</interface>
+    </component>
+
+    <component key="JiraToVertecConfiguration" class="com.jira.plugins.configuration.JiraToVertecConfigurationImpl">
+        <description>Konfiguration für das JiraToVertec Plugin.</description>
+        <interface>com.jira.plugins.configuration.JiraToVertecConfiguration</interface>
+    </component>
+
+    <component key="LeistungsManager" class="com.jira.plugins.LeistungsManager">
+    </component>
+
+</atlassian-plugin>    

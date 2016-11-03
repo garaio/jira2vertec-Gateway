@@ -1,0 +1,3 @@
+#if ($value)
+    $textutils.htmlEncode($phaseDescription)
+#end

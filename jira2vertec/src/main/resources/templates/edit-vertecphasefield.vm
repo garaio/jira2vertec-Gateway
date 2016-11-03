@@ -1,0 +1,29 @@
+#controlHeader ($action $customField.id $customField.name $fieldLayoutItem.required $displayParameters.noHeader)
+<script type="text/javascript" charset="utf-8">
+     AJS.toInit(function () {
+        initVertecToJira("${baseurl}", "$customField.id", "$projektId", "$phaseId");
+     });
+
+     AJS.$(function() {
+        JIRA.bind(JIRA.Events.NEW_CONTENT_ADDED, function(e, context, reason) {
+            if (reason == JIRA.CONTENT_ADDED_REASON.inlineEditStarted ) {
+                initVertecToJira("${baseurl}", "$customField.id", "$projektId", "$phaseId");
+            }
+        });
+
+        JIRA.bind(JIRA.Events.NEW_PAGE_ADDED, function(e, context, reason) {
+                initVertecToJira("${baseurl}", "$customField.id", "$projektId", "$phaseId");
+        });
+    });
+
+</script>
+
+<input type="hidden" id="$customField.id" name="$customField.id" value="$textutils.htmlEncode($!value)"  />
+
+<select id="selectProjekt" name="selectProjekt" >
+</select>
+
+<select id="selectPhase" name="selectPhase" >
+</select>
+
+#controlFooter ($action $fieldLayoutItem.fieldDescription $displayParameters.noHeader)
