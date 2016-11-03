@@ -1,0 +1,12 @@
+<Envelope>
+    <Body>
+        <Fault>
+            <faultcode>Client</faultcode>
+            <faultstring>Error(s) in XML input</faultstring>
+            <details>
+                <detailitem>Error: Incorrect syntax near 'd20' on line 14 col 28</detailitem>
+            </details>
+        </Fault>
+    </Body>
+</Envelope>
+        

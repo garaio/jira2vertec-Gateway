@@ -1,0 +1,21 @@
+<Envelope>
+    <Body>
+        <QueryResponse>
+            <Projekt>
+                <objid>0001</objid>
+                <code>TestProjekt 1</code>
+				<beschrieb>Beschrieb TestProjekt 1</beschrieb>
+            </Projekt>
+            <Projekt>
+                <objid>0002</objid>
+                <code>TestProjekt 2</code>
+				<beschrieb>Beschrieb TestProjekt 2</beschrieb>
+            </Projekt>
+            <Projekt>
+                <objid>0003</objid>
+                <code>TestProjekt 3</code>
+				<beschrieb>Beschrieb TestProjekt Lang 3</beschrieb>
+            </Projekt>
+        </QueryResponse>
+    </Body>
+</Envelope>

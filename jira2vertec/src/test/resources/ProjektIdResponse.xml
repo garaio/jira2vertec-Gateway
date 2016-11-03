@@ -1,0 +1,11 @@
+<Envelope>
+  <Body>
+    <QueryResponse>
+      <ProjektPhase>
+        <objid>21507</objid>
+        <code>test</code>
+        <projektId>19720</projektId>
+      </ProjektPhase>
+    </QueryResponse>
+  </Body>
+</Envelope>

@@ -1,0 +1,10 @@
+<Envelope>
+  <Body>
+    <QueryResponse>
+      <Projektbearbeiter>
+        <objid>25534</objid>
+        <loginName>mjr</loginName>
+      </Projektbearbeiter>
+    </QueryResponse>
+  </Body>
+</Envelope>

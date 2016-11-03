@@ -1,0 +1,11 @@
+<Envelope>
+  <Body>
+    <CreateResponse>
+      <OffeneLeistung>
+        <objid>5028</objid>
+        <isValid>1</isValid>
+      </OffeneLeistung>
+    </CreateResponse>
+  </Body>
+</Envelope>
+       

@@ -1,0 +1,30 @@
+<Envelope>
+  <Body>
+    <QueryResponse>
+      <ProjektPhase>
+        <objid>19724</objid>
+        <aktiv>0</aktiv>
+        <code>MILVER</code>
+        <projektId>19720</projektId>
+        <projektName>armasuisse</projektName>
+        <projektAktiv>Y</projektAktiv>
+      </ProjektPhase>
+      <ProjektPhase>
+        <objid>21507</objid>
+        <aktiv>1</aktiv>
+        <code>KdoRekr2</code>
+        <projektId>19720</projektId>
+        <projektName>armasuisse</projektName>
+        <projektAktiv>Y</projektAktiv>
+      </ProjektPhase>
+      <ProjektPhase>
+        <objid>21508</objid>
+        <aktiv>1</aktiv>
+        <code>Sphairi</code>
+        <projektId>19720</projektId>
+        <projektName>armasuisse</projektName>
+        <projektAktiv>Y</projektAktiv>
+      </ProjektPhase>
+    </QueryResponse>
+  </Body>
+</Envelope>
