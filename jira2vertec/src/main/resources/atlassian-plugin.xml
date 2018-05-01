@@ -11,7 +11,7 @@
     </rest>
 
     <customfield-type key="vertecphasefield" name="Auswahlfeld für Vertec Phasen."
-                      class="com.jira.plugins.VertecPhaseField">
+                      class="com.garaio.jira.plugins.VertecPhaseField">
         <description>Dropdown Listen um eine Vertec-Projekt und eine Phase auszuwählen.</description>
 
         <resource type="velocity" name="edit" location="templates/edit-vertecphasefield.vm"/>
@@ -35,31 +35,31 @@
     </web-resource>
 
     <component-import key="eventPublisher" interface="com.atlassian.event.api.EventPublisher"/>
-    <component key="eventListener" class="com.jira.plugins.VertecEventListener">
+    <component key="eventListener" class="com.garaio.jira.plugins.VertecEventListener">
         <description>Class that processes the incoming JIRA issue events.</description>
     </component>
 
-    <component key="VertecRepository" class="com.jira.plugins.vertec.VertecRepositoryImpl">
+    <component key="VertecRepository" class="com.garaio.jira.plugins.vertec.VertecRepositoryImpl">
         <description>Repository für den Zugriff auf Vertec.</description>
-        <interface>com.jira.plugins.vertec.VertecRepository</interface>
+        <interface>com.garaio.jira.plugins.vertec.VertecRepository</interface>
     </component>
 
-    <component key="VertecConnector" class="com.jira.plugins.vertec.service.VertecConnectorImpl">
+    <component key="VertecConnector" class="com.garaio.jira.plugins.vertec.service.VertecConnectorImpl">
         <description>HTTP Schnittstelle zum Vertec Xml Service.</description>
-        <interface>com.jira.plugins.vertec.service.VertecConnector</interface>
+        <interface>com.garaio.jira.plugins.vertec.service.VertecConnector</interface>
     </component>
 
-    <component key="VertecSerializer" class="com.jira.plugins.vertec.service.VertecSerializerImpl">
+    <component key="VertecSerializer" class="com.garaio.jira.plugins.vertec.service.VertecSerializerImpl">
         <description>Serializer für Vertec XML Objekte.</description>
-        <interface>com.jira.plugins.vertec.service.VertecSerializer</interface>
+        <interface>com.garaio.jira.plugins.vertec.service.VertecSerializer</interface>        
     </component>
 
-    <component key="JiraToVertecConfiguration" class="com.jira.plugins.configuration.JiraToVertecConfigurationImpl">
+    <component key="JiraToVertecConfiguration" class="com.garaio.jira.plugins.configuration.JiraToVertecConfigurationImpl">
         <description>Konfiguration für das JiraToVertec Plugin.</description>
-        <interface>com.jira.plugins.configuration.JiraToVertecConfiguration</interface>
+        <interface>com.garaio.jira.plugins.configuration.JiraToVertecConfiguration</interface>
     </component>
 
-    <component key="LeistungsManager" class="com.jira.plugins.LeistungsManager">
+    <component key="LeistungsManager" class="com.garaio.jira.plugins.LeistungsManager">
     </component>
 
 </atlassian-plugin>    

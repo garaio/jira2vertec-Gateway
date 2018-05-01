@@ -1,21 +1,4 @@
-/**
- * Copyright 2013 GARAIO AG <www.garaio.com>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-var SELECT_PROJEKT = "#selectProjekt";
+var SELECT_PROJEKT = "#selectProjekt"; 
 var SELECT_PHASE = "#selectPhase";
 var CUSTOM_FIELD = "";
 var CUSTOM_FIELD_CB = "";
@@ -33,6 +16,7 @@ function initVertecToJira(baseUrl, customFieldId, issueProjektId, issuePhaseId) 
     _initialPhaseId = AJS.$(CUSTOM_FIELD).val();
 
     if (!IsCustomFieldAvailable()) {
+        // In diesem Fall ist nicht die erwartete Form des CustomFields vorhanden
         return;
     }
 
@@ -99,7 +83,7 @@ function ReloadProjekte() {
             items.push('<option value="' + _initialProjektId + '">' + "-- Ung&uuml;ltige Phase --" + '</option>');
         }
         else if (_initialPhaseId.length > 0 && AJS.$(SELECT_PROJEKT + " option[value='" + _initialProjektId + "']").length < 1) {
-            // wenn aktuell ausgewï¿½hltes Projekt nicht in der Dropdown ist
+            // wenn aktuell ausgewähltes Projekt nicht in der Dropdown ist
             items.push('<option value="' + _initialProjektId + '">' + "-- Projekt deaktiviert --" + '</option>');
         }
         projektSelect.html(items.join(''));
@@ -108,7 +92,7 @@ function ReloadProjekte() {
         //projektSelect.change();
 
         if (AJS.$(CUSTOM_FIELD_CB).length > 0)    {
-            // Checkbox bei Massenverï¿½nderungen deselektieren
+            // Checkbox bei Massenveränderungen deselektieren
             AJS.$(CUSTOM_FIELD_CB).removeAttr('checked')  ;
         }
 		
@@ -173,7 +157,7 @@ function ProjektSelected(){
                     items.push('<option value="' + _initialPhaseId + '">' + "-- Ung&uuml;ltige Phase --" + '</option>');
                     phaseSelect.html(items.join(''));
                 } else if (AJS.$(SELECT_PHASE + " option[value='" + _initialPhaseId + "']").length < 1) {
-                    // wenn aktuell ausgewï¿½hlte Phase nicht in der Dropdown ist
+                    // wenn aktuell ausgewählte Phase nicht in der Dropdown ist
                     items.push('<option value="' + _initialPhaseId + '">' + "-- Phase deaktiviert --" + '</option>');
                     phaseSelect.html(items.join(''));
                 }
