@@ -24,6 +24,12 @@ public class TestConfigurationImpl implements JiraToVertecConfiguration {
         return true;
     }
 
+    public String getVertecJiraReferenceField() { return "referenz"; }
+
+    public boolean getVertecJiraReferenceFieldIsZusatzfeld() {
+        return false;
+    }
+
     public String getDefaultPhaseIdWennNichtZugeordnet() {
         return "phaseIdNichtZugeordnet";
     }

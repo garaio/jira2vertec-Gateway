@@ -172,7 +172,7 @@ public class VertecRepositoryImpl implements VertecRepository
         leistung.setDatum(date);
         leistung.setPhaseId(vertecPhaseId);
         leistung.setBearbeiterId(benutzerId);
-        leistung.setJiraReferenz(jiraReferenz);
+        leistung.setJiraReferenz(configuration.getVertecJiraReferenceField(), jiraReferenz);
         leistung.setMinuten(minuten);
         leistung.setText(comment);
 
@@ -213,7 +213,7 @@ public class VertecRepositoryImpl implements VertecRepository
     public List<VertecLeistung> getLeistungen(String jiraReferenz)
     {
         List<VertecLeistung> leistungen = getVertecSoapEnvelopeForReferenzByOcl("Leistung", jiraReferenz);
-        
+
         if (logger.isInfoEnabled())
             logger.info(String.format("[JiraToVertec] %s Leistung(en) mit der Jira Worklog-ID %s wurden aus Vertec ausgelesen.", leistungen == null ? 0 : leistungen.size(), jiraReferenz));
 
@@ -230,13 +230,27 @@ public class VertecRepositoryImpl implements VertecRepository
         return leistungen;
     }
 
-    private <T> List<T>  getVertecSoapEnvelopeForReferenzByOcl(String ocl, String jiraReferenz) {
+    private <T extends VertecLeistung> List<T>  getVertecSoapEnvelopeForReferenzByOcl(String ocl, String jiraReferenz) {
+        String sqlWhere;
+        if(configuration.getVertecJiraReferenceFieldIsZusatzfeld()) {
+            sqlWhere = String.format("BOLD_ID IN (SELECT UserEintrag FROM Zusatzfeld WHERE MetaZusatzfeld IN (SELECT BOLD_ID FROM ZusatzFeldKlasse WHERE FieldName = '%1s') AND Wert = '%2s')", configuration.getVertecJiraReferenceField(), jiraReferenz);
+        }
+        else
+        {
+            sqlWhere = String.format("%1s LIKE '%2s'", configuration.getVertecJiraReferenceField(), jiraReferenz);
+        }
+
         VertecSoapSelection selection = new VertecSoapSelection();
         selection.setOcl(ocl);
-        selection.setSqlWhere(String.format("referenz LIKE '%1s'", jiraReferenz));
-        VertecSoapEnvelope vertecSoapEnvelope = getEnvelope(selection, VertecLeistung.createResultDef());
+        selection.setSqlWhere(sqlWhere);
+        VertecSoapEnvelope vertecSoapEnvelope = getEnvelope(selection, VertecLeistung.createResultDef(configuration.getVertecJiraReferenceField()));
 
-        return executeListQuery(vertecSoapEnvelope);
+        List<T> result = executeListQuery(vertecSoapEnvelope);
+        for (VertecLeistung leistung: result) {
+            leistung.setJiraReferenz(configuration.getVertecJiraReferenceField(), jiraReferenz);
+        }
+
+        return result;
     }
 
     public VertecDateTimeProperty getSperrdatum()

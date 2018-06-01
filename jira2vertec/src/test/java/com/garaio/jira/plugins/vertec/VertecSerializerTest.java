@@ -1,5 +1,6 @@
 package com.garaio.jira.plugins.vertec;
 
+import com.garaio.jira.plugins.configuration.JiraToVertecConfiguration;
 import com.garaio.jira.plugins.vertec.entities.*;
 import com.garaio.jira.plugins.vertec.service.VertecServiceException;
 import com.garaio.jira.plugins.vertec.service.VertecSerializerImpl;
@@ -17,6 +18,8 @@ import java.util.List;
 
 public class VertecSerializerTest extends TestCase {
 
+    private JiraToVertecConfiguration config = new TestConfigurationImpl();
+
     public void testCanSerializeEnvleopeRequest() throws JAXBException {
 
         VertecSerializerImpl serializer = new VertecSerializerImpl();
@@ -26,7 +29,7 @@ public class VertecSerializerTest extends TestCase {
         VertecSoapSelection selection = new VertecSoapSelection();
         selection.setOcl("Leistung");
         selection.setObjRef("4157");
-        selection.setSqlWhere("referenz = '123456789'");
+        selection.setSqlWhere(config.getVertecJiraReferenceField() + " = '123456789'");
         query.setSelection(selection);
         e.getBody().setContent(query);
 
@@ -57,7 +60,7 @@ public class VertecSerializerTest extends TestCase {
 
         assertNotNull(leistungen);
         assertEquals(3, leistungen.size());
-        assertEquals("123456", leistungen.get(0).getJiraReferenz());
+        assertEquals("123456", leistungen.get(0).getJiraReferenz(config.getVertecJiraReferenceField()));
         assertEquals("111", leistungen.get(0).getPhaseId());
         assertEquals(false, leistungen.get(0).istVerrechnet());
         assertEquals(true, leistungen.get(1).istVerrechnet());

@@ -18,6 +18,10 @@ public interface JiraToVertecConfiguration {
 
     boolean getUseVertecCloudAuth();
 
+    String getVertecJiraReferenceField();
+
+    boolean getVertecJiraReferenceFieldIsZusatzfeld();
+
     String getDefaultPhaseIdWennNichtZugeordnet();
 
     String getDefaultPhaseIdWennNachbearbeitungNoetig();

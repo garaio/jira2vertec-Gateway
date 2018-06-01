@@ -1,12 +1,19 @@
 package com.garaio.jira.plugins.vertec.entities;
 
 import com.garaio.jira.plugins.vertec.soap.VertecSoapResultDef;
+import com.sun.org.apache.xerces.internal.dom.ElementNSImpl;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.namespace.QName;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 public abstract class VertecLeistung extends VertecBaseEntity
 {
@@ -18,7 +25,7 @@ public abstract class VertecLeistung extends VertecBaseEntity
         }
     };
 
-    private String jiraReferenz;
+    private List<JAXBElement<String>> otherProperties = new ArrayList<>();
 
     private int minuten;
 
@@ -32,10 +39,40 @@ public abstract class VertecLeistung extends VertecBaseEntity
     @XmlElement(name = "bearbeiter")
     private VertecObjectRef bearbeiterRef;
 
-    @XmlElement(name = "referenz")
-    public void setJiraReferenz(String jiraReferenz)
+    @XmlAnyElement
+    public void setOthers(List<JAXBElement<String>> otherProperties) {
+        this.otherProperties = otherProperties;
+    }
+
+    public void setJiraReferenz(String fieldName, String jiraReferenz)
     {
-        this.jiraReferenz = jiraReferenz;
+        if(fieldName == null)
+        {
+            return;
+        }
+        try {
+            for (Object property : otherProperties)
+            {
+                Method getTagName = property.getClass().getMethod("getTagName");
+                if(getTagName.invoke(property).equals(fieldName))
+                {
+                    Method setNodeValue = property.getClass().getMethod("setNodeValue", String.class);
+
+                    // element update
+                    setNodeValue.invoke(property, jiraReferenz);
+                    return;
+                }
+            }
+        } catch (NoSuchMethodException e) {
+            return;
+        } catch (IllegalAccessException e) {
+            return;
+        } catch (InvocationTargetException e) {
+            return;
+        }
+
+        JAXBElement<String> value = new JAXBElement<>(new QName("", fieldName), String.class, jiraReferenz);
+        otherProperties.add(value);
     }
 
     @XmlElement(name = "minutenInt")
@@ -96,9 +133,34 @@ public abstract class VertecLeistung extends VertecBaseEntity
         return text;
     }
 
-    public String getJiraReferenz()
+    public String getJiraReferenz(String fieldName)
     {
-        return jiraReferenz;
+        try {
+            for (Object property: otherProperties) {
+                Method getTagName = property.getClass().getMethod("getTagName");
+                if(fieldName.equals(getTagName.invoke(property))){
+                    Method getTextContent = property.getClass().getMethod("getTextContent");
+
+                    Object value = getTextContent.invoke(property);
+                    if(value != null) {
+                        return value.toString();
+                    }
+                }
+            }
+        } catch (NoSuchMethodException e) {
+            return null;
+        } catch (IllegalAccessException e) {
+            return null;
+        } catch (InvocationTargetException e) {
+            return null;
+        }
+
+        return null;
+    }
+
+    public List<JAXBElement<String>> getOthers()
+    {
+        return otherProperties;
     }
 
     public Date getDatum()
@@ -108,12 +170,12 @@ public abstract class VertecLeistung extends VertecBaseEntity
 
     public abstract boolean istVerrechnet();
 
-    public static VertecSoapResultDef createResultDef()
+    public static VertecSoapResultDef createResultDef(String refrenzFieldName)
     {
         VertecSoapResultDef resultDef = new VertecSoapResultDef();
 
         //Bezeichnung der Phase
-        resultDef.getMembers().add("referenz");
+        resultDef.getMembers().add(refrenzFieldName);
         resultDef.getMembers().add("datum");
         resultDef.getMembers().add("minutenInt");
         resultDef.getMembers().add("text");

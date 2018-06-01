@@ -15,6 +15,8 @@ public class JiraToVertecConfigurationImpl implements JiraToVertecConfiguration 
     private String vertecServiceUser;
     private String vertecServicePassword;
     private boolean useVertecCloudAuth;
+    private String vertecJiraReferenceField;
+    private boolean vertecJiraReferenceFieldIsZusatzfeld;
     private String defaultPhaseIdWennNichtZugeordnet;
     private String defaultPhaseIdWennNachbearbeitungNoetig;
     private boolean isCachingEnabled;
@@ -29,6 +31,8 @@ public class JiraToVertecConfigurationImpl implements JiraToVertecConfiguration 
         vertecServiceUser = properties.getProperty("vertecServiceUser");
         vertecServicePassword = properties.getProperty("vertecServicePassword");
         useVertecCloudAuth = Boolean.parseBoolean(properties.getProperty("useVertecCloudAuth"));
+        vertecJiraReferenceField = properties.getProperty("vertecJiraReferenceField");
+        vertecJiraReferenceFieldIsZusatzfeld = Boolean.parseBoolean(properties.getProperty("vertecJiraReferenceFieldIsZusatzfeld"));
         defaultPhaseIdWennNichtZugeordnet = properties.getProperty("defaultPhaseIdWennNichtZugeordnet");
         defaultPhaseIdWennNachbearbeitungNoetig = properties.getProperty("defaultPhaseIdWennNachbearbeitungNoetig");
         isCachingEnabled = Boolean.parseBoolean(properties.getProperty("enableCaching"));
@@ -52,8 +56,18 @@ public class JiraToVertecConfigurationImpl implements JiraToVertecConfiguration 
         return vertecServicePassword;
     }
 
-    public boolean getUseVertecCloudAuth() {
-        return useVertecCloudAuth;
+    public boolean getUseVertecCloudAuth() { return useVertecCloudAuth; }
+
+    public String getVertecJiraReferenceField() {
+        if(vertecJiraReferenceField != null && !vertecJiraReferenceField.isEmpty()) {
+            return vertecJiraReferenceField;
+        }
+
+        return "referenz";
+    }
+
+    public boolean getVertecJiraReferenceFieldIsZusatzfeld() {
+        return vertecJiraReferenceFieldIsZusatzfeld;
     }
 
     public String getDefaultPhaseIdWennNichtZugeordnet() {
