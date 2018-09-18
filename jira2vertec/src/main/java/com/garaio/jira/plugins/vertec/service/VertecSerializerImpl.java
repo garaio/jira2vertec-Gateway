@@ -4,7 +4,6 @@ import com.garaio.jira.plugins.vertec.soap.VertecSoapBody;
 import com.garaio.jira.plugins.vertec.soap.VertecSoapEnvelope;
 import com.garaio.jira.plugins.vertec.soap.VertecSoapFault;
 import com.garaio.jira.plugins.vertec.soap.VertecSoapQueryResponse;
-import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
 import javax.xml.bind.JAXBContext;
@@ -12,7 +11,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 

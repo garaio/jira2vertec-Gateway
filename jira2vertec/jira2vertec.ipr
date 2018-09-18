@@ -299,6 +299,17 @@
         <root url="jar://$MAVEN_REPOSITORY$/com/atlassian/cache/atlassian-cache-api/1.0/atlassian-cache-api-1.0-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: com.atlassian.crowd:embedded-crowd-api:2.4.9">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/atlassian/crowd/embedded-crowd-api/2.4.9/embedded-crowd-api-2.4.9.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/atlassian/crowd/embedded-crowd-api/2.4.9/embedded-crowd-api-2.4.9-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/atlassian/crowd/embedded-crowd-api/2.4.9/embedded-crowd-api-2.4.9-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: com.atlassian.event:atlassian-event:2.3.0">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/com/atlassian/event/atlassian-event/2.3.0/atlassian-event-2.3.0.jar!/" />
@@ -550,6 +561,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/mockito/mockito-all/1.8.0/mockito-all-1.8.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.slf4j:slf4j-api:1.7.25">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.springframework:spring:2.5.5">

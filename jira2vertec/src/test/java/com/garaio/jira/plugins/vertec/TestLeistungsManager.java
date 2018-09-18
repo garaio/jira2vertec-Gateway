@@ -4,6 +4,8 @@ import com.atlassian.cache.Cache;
 import com.atlassian.cache.CacheManager;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.worklog.Worklog;
+import com.atlassian.jira.user.ApplicationUser;
+import com.atlassian.jira.user.LazyLoadingApplicationUser;
 import com.garaio.jira.plugins.LeistungsManager;
 import com.garaio.jira.plugins.configuration.JiraToVertecConfiguration;
 import com.garaio.jira.plugins.vertec.entities.*;
@@ -769,7 +771,12 @@ public class TestLeistungsManager extends TestCase
         when(worklog.getStartDate()).thenReturn(date);
         when(worklog.getIssue()).thenReturn(issue);
         when(worklog.getComment()).thenReturn(comment);
-        
+
+        ApplicationUser appUser = mock(LazyLoadingApplicationUser.class);
+        when(appUser.getUsername()).thenReturn(user);
+
+        when(worklog.getAuthorObject()).thenReturn(appUser);
+
         return worklog;
     }
 

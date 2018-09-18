@@ -1,7 +1,6 @@
 package com.garaio.jira.plugins.vertec.entities;
 
 import com.garaio.jira.plugins.vertec.soap.VertecSoapResultDef;
-import com.sun.org.apache.xerces.internal.dom.ElementNSImpl;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAnyElement;

@@ -10,7 +10,7 @@
     <!--<version>${bambooVersion}.${bambooBuildNumber}</version>-->
     <!--
     Für lokale Tests (inkrementieren, damit Jira die Änderung auch wirklich mitbekommt)-->
-    <version>1.8.1</version>
+    <version>1.8.3</version>
     
 
     <organization>
@@ -42,6 +42,13 @@
             <artifactId>jira-core</artifactId>
             <version>${jira.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.crowd</groupId>
+            <artifactId>embedded-crowd-api</artifactId>
+            <version>2.4.9</version>
+            <scope>test</scope>
         </dependency>
         
         <dependency>
@@ -133,11 +140,19 @@
             <artifactId>commons-io</artifactId>
             <version>1.4</version>
         </dependency>
-		
+
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.16</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+            <scope>provided</scope>
         </dependency>
 		
 		<dependency>
@@ -157,6 +172,7 @@
             <artifactId>entityengine</artifactId>
             <version>1.3.10</version>
         </dependency>
+
         <dependency>
             <groupId>com.atlassian.sal</groupId>
             <artifactId>sal-api</artifactId>

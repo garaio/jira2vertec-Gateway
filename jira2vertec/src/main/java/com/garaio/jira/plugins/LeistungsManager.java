@@ -121,11 +121,11 @@ public class LeistungsManager
     {
         List<VertecLeistung> leistungen = getLeistungen(worklog.getId().toString());
         //Gibt es eine Leistung die angepasst werden kann?
-        VertecLeistung offeneLeistung = getFirstOffeneLeistung(leistungen, worklog.getAuthorKey());
+        VertecLeistung offeneLeistung = getFirstOffeneLeistung(leistungen, worklog.getAuthorObject().getUsername());
 
         //Unterscheiden sich die Phasen der offenen und mutierten Leistungen muss sichergestellt werden, dass letztere buchbar ist
         if (offeneLeistung != null && !offeneLeistung.getPhaseId().equals(vertecPhaseId)) {
-            vertecPhaseId = getBuchbarePhase(vertecPhaseId, offeneLeistung.getDatum(), worklog.getAuthorKey());
+            vertecPhaseId = getBuchbarePhase(vertecPhaseId, offeneLeistung.getDatum(), worklog.getAuthorObject().getUsername());
         }
         
         leistungAktualisieren(worklog, vertecPhaseId, timeSpent, leistungen, offeneLeistung);
@@ -203,7 +203,7 @@ public class LeistungsManager
             }
         }
         else {
-            neueLeitungErstellen(differenzMinuten, worklog.getId().toString(), worklog.getAuthorKey(), worklogText, worklogDate, vertecPhaseId);
+            neueLeitungErstellen(differenzMinuten, worklog.getId().toString(), worklog.getAuthorObject().getUsername(), worklogText, worklogDate, vertecPhaseId);
         }
 
         //Alle offenen Leistungen m�ssen das neue Datum sowie den neuen Kommentar haben...
