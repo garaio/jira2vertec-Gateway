@@ -34,10 +34,30 @@ public class VertecSerializerTest extends TestCase {
         e.getBody().setContent(query);
 
         StringWriter writer = new StringWriter();
-        serializer.SerializeObject(e);
+        String result = serializer.SerializeObject(e);
 
-        String result = writer.toString();
         assertNotNull(result);
+        assertEquals("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?><Envelope><Header/><Body><Query><Selection><objref>4157</objref><ocl>Leistung</ocl><sqlwhere>referenz = '123456789'</sqlwhere></Selection></Query></Body></Envelope>", result);
+    }
+
+    public void testCanSerializeCreateRequest() throws JAXBException {
+        VertecSerializerImpl serializer = new VertecSerializerImpl();
+
+        VertecOffeneLeistung offeneLeistung = new VertecOffeneLeistung();
+        offeneLeistung.setPhaseId("1919585");
+        offeneLeistung.setBearbeiterId("2062925");
+        offeneLeistung.setMinuten(180);
+        offeneLeistung.setJiraReferenz(config.getVertecJiraReferenceField(), "101542");
+        offeneLeistung.setText("PUT-1772 : PUT-1814 : Installation für cf");
+        VertecSoapCreate create = new VertecSoapCreate();
+        create.setItem(offeneLeistung);
+
+        VertecSoapEnvelope e = new VertecSoapEnvelope();
+        e.getBody().setContent(create);
+
+        String result = serializer.SerializeObject(e);
+        assertNotNull(result);
+        assertEquals("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?><Envelope><Header/><Body><Create><OffeneLeistung><phase><objref>1919585</objref></phase><bearbeiter><objref>2062925</objref></bearbeiter><minutenInt>180</minutenInt><referenz>101542</referenz><text>PUT-1772 : PUT-1814 : Installation für cf</text></OffeneLeistung></Create></Body></Envelope>", result);
     }
 
     public void testCanDeserializeProjectResponse() throws JAXBException, VertecServiceException, IOException {

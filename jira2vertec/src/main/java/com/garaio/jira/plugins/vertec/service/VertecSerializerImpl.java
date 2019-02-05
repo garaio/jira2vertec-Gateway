@@ -35,9 +35,11 @@ public class VertecSerializerImpl implements VertecSerializer
     private Marshaller getMarshaller() throws JAXBException
     {
         Marshaller marshaller = jaxbContext.createMarshaller();
-        // Ohne setzen des Encoding Properties wird UTF-8 verwendet, was zu Problemen mit Umlauten f�hrt.
-        marshaller.setProperty(Marshaller.JAXB_ENCODING, "");
-        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+
+        // XML declaration mit utf-8 setzen.
+        // siehe https://www.vertec.com/ch/support/kb/technik-und-datenmodell/vertecservice/xml/xmlschnittstelle/
+        marshaller.setProperty(Marshaller.JAXB_ENCODING, "utf-8");
+        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.FALSE);
 
         return marshaller;
     }

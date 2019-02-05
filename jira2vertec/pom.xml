@@ -10,7 +10,7 @@
     <!--<version>${bambooVersion}.${bambooBuildNumber}</version>-->
     <!--
     Für lokale Tests (inkrementieren, damit Jira die Änderung auch wirklich mitbekommt)-->
-    <version>1.8.3</version>
+    <version>1.8.5</version>
     
 
     <organization>
